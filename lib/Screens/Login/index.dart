@@ -60,7 +60,7 @@ class _LoginScreen extends State<LoginScreen> {
             const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
-                loginModel.login();
+                loginModel.login(email);
                 Navigator.pushNamed(context, '/listDialog');
               },
               child: const Text('Login'),
