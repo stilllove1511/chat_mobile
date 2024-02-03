@@ -1,4 +1,9 @@
+import 'package:chat_mobile/Models/LoginModel.dart';
+import 'package:chat_mobile/Screens/Dialogs/index.dart';
+import 'package:chat_mobile/Screens/Login/index.dart';
+import 'package:chat_mobile/Screens/Chat/index.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   runApp(const MyApp());
@@ -10,13 +15,17 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
+    return ChangeNotifierProvider(
+      create: (context) => LoginModel(),
+      child: MaterialApp(
+        home: const ListDialog(),
+        initialRoute: '/listDialog',
+        routes: {
+          '/listDialog': (context) => const ListDialog(),
+          '/login': (context) => const LoginScreen(),
+          '/chat': (context) => ChatScreen()
+        },
       ),
-      home: const Text('Flutter Demo Home Page'),
     );
   }
 }
