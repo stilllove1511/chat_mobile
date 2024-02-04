@@ -1,7 +1,7 @@
 import 'package:chat_mobile/Models/LoginModel.dart';
-import 'package:chat_mobile/Screens/Login/index.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:chat_mobile/Screens/login.dart';
 
 class ListDialog extends StatelessWidget {
   const ListDialog({super.key});

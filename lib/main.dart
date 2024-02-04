@@ -1,13 +1,21 @@
 import 'package:chat_mobile/Models/LoginModel.dart';
-import 'package:chat_mobile/Screens/Dialogs/index.dart';
-import 'package:chat_mobile/Screens/Login/index.dart';
-import 'package:chat_mobile/Screens/Chat/index.dart';
+import 'package:chat_mobile/Screens/dialogs.dart';
+import 'package:chat_mobile/Screens/login.dart';
+import 'package:chat_mobile/Screens/chat.dart';
+import 'package:chat_mobile/api/firebase_api.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:provider/provider.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
 void main() async {
   await dotenv.load(fileName: ".env");
+
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  await FirebaseApi().initNotifications();
   runApp(const MyApp());
 }
 
