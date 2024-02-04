@@ -4,14 +4,15 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class Auth {
   late String uerId;
+  late String FCMToken;
 }
 
 class LoginModel extends ChangeNotifier {
   bool _isLogin = false;
 
-  Auth? _auth;
+  Auth _auth = Auth()..uerId = '';
 
-  Auth? get auth => _auth;
+  Auth get auth => _auth;
 
   void setUserId(String userId) {
     _auth = Auth()..uerId = userId;
@@ -27,16 +28,16 @@ class LoginModel extends ChangeNotifier {
 
   void login(String id) async {
     try {
-    final baseUrl = dotenv.env['API_URL'];
-    final response = await dio.post(
-      '$baseUrl/account/login',
-      data: {
-        'id': id,
-      },
-    );
+      final baseUrl = dotenv.env['API_URL'];
+      final response = await dio.post(
+        '$baseUrl/account/login',
+        data: {
+          'id': id,
+        },
+      );
 
-    setUserId(response.data['id']);
-    _isLogin = true;
+      setUserId(response.data['id']);
+      _isLogin = true;
     } catch (e) {
       setUserId('');
       _isLogin = false;
