@@ -31,22 +31,12 @@ class _LoginScreen extends State<LoginScreen> {
     final messagingProvider = Provider.of<MessagingProvider>(context);
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Login'),
-      ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Text(
-                'Login',
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
               const SizedBox(height: 20),
               TextFormField(
                 decoration: const InputDecoration(
