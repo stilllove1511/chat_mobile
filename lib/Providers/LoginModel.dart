@@ -27,21 +27,8 @@ class LoginModel extends ChangeNotifier {
   final dio = Dio();
 
   void login(String id) async {
-    try {
-      final baseUrl = dotenv.env['API_URL'];
-      final response = await dio.post(
-        '$baseUrl/account/login',
-        data: {
-          'id': id,
-        },
-      );
-
-      setUserId(response.data['id']);
-      _isLogin = true;
-    } catch (e) {
-      setUserId('');
-      _isLogin = false;
-    }
+    setUserId(id);
+    _isLogin = true;
 
     notifyListeners();
   }

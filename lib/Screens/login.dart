@@ -1,4 +1,6 @@
-import 'package:chat_mobile/Models/LoginModel.dart';
+import 'package:chat_mobile/Providers/LoginModel.dart';
+import 'package:chat_mobile/Providers/MessagingProvider.dart';
+import 'package:chat_mobile/api/rest_api.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -21,9 +23,12 @@ class _LoginScreen extends State<LoginScreen> {
     password = value;
   }
 
+  Api api = Api();
+
   @override
   Widget build(BuildContext context) {
     final loginModel = Provider.of<LoginModel>(context);
+    final messagingProvider = Provider.of<MessagingProvider>(context);
 
     return Scaffold(
       appBar: AppBar(
@@ -59,7 +64,11 @@ class _LoginScreen extends State<LoginScreen> {
             ),
             const SizedBox(height: 20),
             ElevatedButton(
-              onPressed: () {
+              onPressed: () async {
+                await api.login(
+                  userId: email,
+                  FCMToken: messagingProvider.token,
+                );
                 loginModel.login(email);
                 Navigator.pushNamed(context, '/listDialog');
               },
