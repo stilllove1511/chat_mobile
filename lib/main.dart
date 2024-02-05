@@ -3,7 +3,7 @@ import 'package:chat_mobile/Providers/MessagingProvider.dart';
 import 'package:chat_mobile/Screens/dialogs.dart';
 import 'package:chat_mobile/Screens/login.dart';
 import 'package:chat_mobile/Screens/chat.dart';
-import 'package:chat_mobile/firebase_options.dart';
+import 'package:chat_mobile/config/firebase_options.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:provider/provider.dart';
