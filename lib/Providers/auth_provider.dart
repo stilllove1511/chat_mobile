@@ -1,22 +1,18 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class Auth {
+  Auth({required this.uerId});
+
   late String uerId;
-  late String FCMToken;
 }
 
-class LoginModel extends ChangeNotifier {
+class AuthProvider extends ChangeNotifier {
   bool _isLogin = false;
 
-  Auth _auth = Auth()..uerId = '';
+  Auth? _auth;
 
-  Auth get auth => _auth;
-
-  void setUserId(String userId) {
-    _auth = Auth()..uerId = userId;
-  }
+  Auth? get auth => _auth;
 
   final bool _isLoadingLogin = false;
 
@@ -27,7 +23,10 @@ class LoginModel extends ChangeNotifier {
   final dio = Dio();
 
   void login(String id) async {
-    setUserId(id);
+    _auth = Auth(
+      uerId: id,
+    );
+    
     _isLogin = true;
 
     notifyListeners();

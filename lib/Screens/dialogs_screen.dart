@@ -1,29 +1,29 @@
-import 'package:chat_mobile/Providers/LoginModel.dart';
+import 'package:chat_mobile/Providers/auth_provider.dart';
 import 'package:chat_mobile/api/rest_api.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:chat_mobile/Screens/login.dart';
+import 'package:chat_mobile/Screens/login_screen.dart';
 
-class ListDialog extends StatelessWidget {
-  const ListDialog({Key? key}) : super(key: key);
+class ListDialogScreen extends StatelessWidget {
+  const ListDialogScreen({Key? key}) : super(key: key);
 
   @override
   @override
   Widget build(BuildContext context) {
-    final loginModel = Provider.of<LoginModel>(context);
+    final loginModel = Provider.of<AuthProvider>(context);
 
     if (!loginModel.isLogin) {
-      // Navigator.pushNamed(context, '/login');
       return const LoginScreen();
     }
 
     return Scaffold(
         appBar: AppBar(
-          title: Text(loginModel.auth.uerId),
+          title: Text(loginModel.auth!.uerId),
+          automaticallyImplyLeading: false,
         ),
         body: FutureBuilder<List<Dialog>>(
           future: fetchDialog(
-            loginModel.auth.uerId,
+            loginModel.auth!.uerId,
           ),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
@@ -60,7 +60,7 @@ class Dialog {
 }
 
 Future<List<Dialog>> fetchDialog(String userId) async {
-  final response = await Api().fetchDialog(userId);
+  final response = await RestApi().fetchDialog(userId);
 
   if (response.statusCode == 200) {
     return (response.data as List)

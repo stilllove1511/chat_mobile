@@ -1,8 +1,8 @@
-import 'package:chat_mobile/Providers/LoginModel.dart';
-import 'package:chat_mobile/Providers/MessagingProvider.dart';
-import 'package:chat_mobile/Screens/dialogs.dart';
-import 'package:chat_mobile/Screens/login.dart';
-import 'package:chat_mobile/Screens/chat.dart';
+import 'package:chat_mobile/Providers/auth_provider.dart';
+import 'package:chat_mobile/Providers/messaging_provider.dart';
+import 'package:chat_mobile/Screens/dialogs_screen.dart';
+import 'package:chat_mobile/Screens/login_screen.dart';
+import 'package:chat_mobile/Screens/chat_screen.dart';
 import 'package:chat_mobile/config/firebase_options.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -27,16 +27,15 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        Provider<LoginModel>(create: (context) => LoginModel()),
-        Provider<MessagingProvider>(create: (context) => MessagingProvider()),
+        ListenableProvider<AuthProvider>(create: (context) => AuthProvider()),
+        ListenableProvider<MessagingProvider>(create: (context) => MessagingProvider()),
       ],
       child: MaterialApp(
-        home: const ListDialog(),
-        initialRoute: '/listDialog',
+        home: const LoginScreen(),
         routes: {
-          '/listDialog': (context) => const ListDialog(),
+          '/listDialog': (context) => const ListDialogScreen(),
           '/login': (context) => const LoginScreen(),
-          '/chat': (context) => ChatScreen()
+          '/chat': (context) => const ChatScreen()
         },
       ),
     );

@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-class Api {
+class RestApi {
   static BaseOptions options =
       BaseOptions(baseUrl: dotenv.env['API_URL'] ?? '');
   Dio dio = Dio(options);

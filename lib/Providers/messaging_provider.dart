@@ -21,7 +21,6 @@ class MessagingProvider with ChangeNotifier {
 
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
       // Handle incoming message
-      print("Received message: ${message.data}");
     });
   }
 }
